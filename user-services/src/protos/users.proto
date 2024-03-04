@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package users;
+
+import "common.proto";
+
+message Users {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  string prof_pict = 4;
+}
+
+message UserRequest {
+    string name = 1;
+    string email = 2;
+    string prof_pict = 3;
+}
+
+message UserList {
+  repeated Users data = 5;
+}
+
+message Empty {}
+
+service UserService {
+  rpc findAll (Empty) returns (UserList) {}
+  rpc findByEmail (commons.Email) returns (Users) {}
+  rpc findById (commons.Id) returns (Users) {}
+  rpc create(UserRequest) returns (Users) {}
+}
